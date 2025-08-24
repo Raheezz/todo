@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>my site</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+
+      }
+
+      body {
+        background: #edf0ec;
+      }
+
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-image: linear-gradient(to bottom,#38c2e5,#83888f);
+        padding: 20px;
+        border-right: 1px solid #676666bf;
+      }
+
+      .sidebar h2 {
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .section {
+        margin-bottom: 25px;
+      }
+
+      .section h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #444;
+      }
+
+      .section ul {
+        list-style: none;
+      }
+
+      .section li {
+        margin: 8px 0;
+        cursor: pointer;
+      }
+
+      .section li.active {
+        font-weight: bold;
+      }
+
+      .tag {
+        background: #dbdee1;
+        padding: 5px 10px;
+        border-radius: 12px;
+        margin-right: 5px;
+        display: inline-block;
+        margin-top: 5px;
+      }
+
+      .add-btn,
+      .add-tag,
+      .settings-btn,
+      .signout-btn {
+        background: none;
+        border: none;
+        color: #555;
+        cursor: pointer;
+        padding: 5px 0;
+        margin-top: 5px;
+      }
+
+      .add-btn:hover,
+      .add-tag:hover,
+      .settings-btn:hover,
+      .signout-btn:hover {
+        text-decoration: underline;
+      }
+
+      .main {
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+        background-image: linear-gradient(to bottom,#96d0de,#a2aab4);
+      }
+
+      .main h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .wall {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .note {
+        background: #aac9daae;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        min-height: 150px;
+        transition: transform 0.2s;
+        word-wrap: break-word;
+      }
+
+      .note:hover {
+        transform: translateY(-5px);
+      }
+
+      .note h4 {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .note p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .yellow {
+        background: #fff9c4;
+      }
+
+      .blue {
+        background: #c8e6ff;
+      }
+
+      .pink {
+        background: #ffdce0;
+      }
+
+      .orange {
+        background: #ffe0b2;
+      }
+
+      .add-new {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        font-size: 36px;
+        color: #666;
+        cursor: pointer;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 30px;
+        border: 1px solid #888;
+        width: 300px;
+        border-radius: 10px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .form {
+        display: flex;
+        flex-direction: space-between;
+        gap: 20px;
+        margin-top: 70px;
+      }
+      .complete {
+        background-color: rgb(76, 163, 76);
+        color: white;
+      }
+      .completed {
+        justify-content: end;
+        background-color: rgb(37, 68, 160);
+        color: white;
+        margin-top: 70px;
+      }
+      button {
+        padding: 2px 5px;
+        border-radius: 5px;
+      }
+      h6 {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 50px;
+      }
+      .green{
+        background-color:rgba(172, 255, 47, 0.744);
+        padding: 10px;
+
+        border-radius: 10px;
+      }
+      h2{
+        margin-top: 20px;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <h2>Menu</h2>
+        <input type="text" placeholder="Search" class="search-box" />
+
+        <div class="section">
+          <h3>Tasks</h3>
+          <ul>
+            <li>Upcoming</li>
+            <li>Today</li>
+            <li>Calendar</li>
+            <li>Sticky Wall</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Lists</h3>
+          <ul>
+            <li>Personal</li>
+            <li>Work</li>
+            <li>List 1</li>
+            <li><button class="add-btn">+ Add New List</button></li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Tags</h3>
+          <span class="tag">Tag 1</span>
+          <span class="tag">Tag 2</span>
+          <button class="add-tag">+ Add Tag</button>
+        </div>
+
+        <div class="section">
+          <button class="settings-btn">⚙ Settings</button>
+          <button class="signout-btn">🚪 Sign Out</button>
+        </div>
+      </div>
+
+      <div class="main">
+        <h6>Sticky Wall</h6>  
+        <h1>Upcoming Tasks</h1>
+        <div class="wall">
+          {% for todo in upcoming_todos %}
+          <div class="note yellow">
+            <h4>{{ todo.title }}</h4>
+            <ul>
+              <li>{{ todo.description }}</li>
+            </ul>
+
+            <div class="form">
+              <form method="POST" action="{% url 'complete_todo' todo.id %}">
+                {% csrf_token %}
+                <button class="complete" type="submit">Complete</button>
+              </form>
+              <button onclick="openEditModal({{ todo.id }}, '{{ todo.title|escapejs }}', '{{ todo.description|default_if_none:''|escapejs }}')">Edit</button>
+
+              <form
+                method="POST"
+                action="{% url 'delete_todo' todo.id %}"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  style="background-color: rgb(234, 76, 76); color: white"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+          {% empty %}
+          <p>No upcoming tasks</p>
+          {% endfor %}
+
+          <div class="wall" style="margin-top: 40px">
+            <div class="note add-new" onclick="openModal()">
+              <span>+</span>
+            </div>
+          </div>
+
+          <!-- Modal -->
+
+          <!-- Edit Todo Modal -->
+          <div id="editTodoModal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close" onclick="closeEditModal()">&times;</span>
+              <h2>Edit Task</h2>
+              <form method="POST" id="editTodoForm">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="title"
+                  id="editTitle"
+                  placeholder="Title"
+                  required
+                />
+                <textarea
+                  name="description"
+                  id="editDescription"
+                  placeholder="Description"
+                ></textarea>
+                <button type="submit">Save Changes</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="addTodoModal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal()">&times;</span>
+              <h2>Add New Todo</h2>
+              <form method="POST" action="{% url 'add_todo' %}">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                  required
+                /><br /><br />
+                <textarea
+                  name="description"
+                  placeholder="Description"
+                  required
+                ></textarea
+                ><br /><br />
+                <button type="submit">Add</button>
+              </form>
+            </div>
+          </div>
+
+          <script>
+            // Close modal if clicked outside the form
+            window.onclick = function (event) {
+              const modal = document.getElementById("addTodoModal");
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            };
+
+            function openModal() {
+              document.getElementById("addTodoModal").style.display = "block";
+            }
+
+            function closeModal() {
+              document.getElementById("addTodoModal").style.display = "none";
+            }
+
+            // Optional: Close modal on outside click
+            window.onclick = function (event) {
+              const modal = document.getElementById("addTodoModal");
+              if (event.target === modal) {
+                closeModal();
+              }
+            };
+
+            function openEditModal(id, title, description) {
+              const modal = document.getElementById("editTodoModal");
+              document.getElementById("editTitle").value = title;
+              document.getElementById("editDescription").value = description;
+
+              // Set dynamic action URL
+              const form = document.getElementById("editTodoForm");
+              form.action = `/edit/${id}/`;
+
+              modal.style.display = "flex";
+            }
+
+            function closeEditModal() {
+              document.getElementById("editTodoModal").style.display = "none";
+            }
+
+            // Optional: Close when clicking outside
+            window.onclick = function (event) {
+              const modal = document.getElementById("editTodoModal");
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            };
+          </script>
+        </div>
+
+        <h2>Completed Tasks</h2>
+        <div class="wall">
+          {% for todo in completed_todos %}
+          <div class="green">
+            <h4>{{ todo.title }}</h4>
+            <ul>
+              <li>{{ todo.description }}</li>
+            </ul>
+            <form method="POST" action="{% url 'undo_complete_todo' todo.id %}">
+              {% csrf_token %}
+              <button class="completed" type="submit">Make Upcoming</button>
+            </form>
+          </div>
+          {% empty %}
+          <p>No completed tasks</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
