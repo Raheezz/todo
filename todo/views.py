@@ -13,7 +13,7 @@ def home(request):
     todos = Todo.objects.all().order_by('-created_at')  # fetch all todo items
     return render(request, 'todo/index.html', {'todos': todos})
 
-
+from django.shortcuts import render
 @login_required
 def todo_list(request):
     upcoming_todos = Todo.objects.filter(is_completed=False).order_by('-created_at')
