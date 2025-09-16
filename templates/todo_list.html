@@ -9,7 +9,6 @@
         margin: 0;
         padding: 0;
         font-family: "Segoe UI", sans-serif;
-
       }
 
       body {
@@ -23,7 +22,7 @@
 
       .sidebar {
         width: 250px;
-        background-image: linear-gradient(to bottom,#38c2e5,#83888f);
+        background-image: linear-gradient(to bottom, #38c2e5, #83888f);
         padding: 20px;
         border-right: 1px solid #676666bf;
       }
@@ -95,7 +94,7 @@
         flex: 1;
         padding: 30px;
         overflow-y: auto;
-        background-image: linear-gradient(to bottom,#96d0de,#a2aab4);
+        background-image: linear-gradient(to bottom, #96d0de, #a2aab4);
       }
 
       .main h1 {
@@ -213,15 +212,49 @@
         text-align: center;
         padding-bottom: 50px;
       }
-      .green{
-        background-color:rgba(172, 255, 47, 0.744);
+      .green {
+        background-color: rgba(172, 255, 47, 0.744);
         padding: 10px;
 
         border-radius: 10px;
       }
-      h2{
+      h2 {
         margin-top: 20px;
         margin-bottom: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid #ccc;
+        }
+
+        .main {
+          padding: 15px;
+        }
+
+        .form {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .note {
+          min-height: auto;
+        }
+
+        h6 {
+          font-size: 28px;
+        }
+
+        .modal-content {
+          width: 90%;
+          margin-top: 30%;
+        }
       }
     </style>
   </head>
@@ -265,13 +298,13 @@
       </div>
 
       <div class="main">
-        <h6>Sticky Wall</h6>  
+        <h6>Sticky Wall</h6>
         <h1>Upcoming Tasks</h1>
         <div class="wall">
           {% for todo in upcoming_todos %}
           <div class="note yellow">
             <h4>{{ todo.title }}</h4>
-            <ul style="list-style-type: none;">
+            <ul style="list-style-type: none">
               <li>{{ todo.description }}</li>
             </ul>
 
@@ -280,7 +313,11 @@
                 {% csrf_token %}
                 <button class="complete" type="submit">Complete</button>
               </form>
-              <button onclick="openEditModal({{ todo.id }}, '{{ todo.title|escapejs }}', '{{ todo.description|default_if_none:''|escapejs }}')">Edit</button>
+              <button
+                onclick="openEditModal({{ todo.id }}, '{{ todo.title|escapejs }}', '{{ todo.description|default_if_none:''|escapejs }}')"
+              >
+                Edit
+              </button>
 
               <form
                 method="POST"
@@ -412,7 +449,7 @@
           {% for todo in completed_todos %}
           <div class="green">
             <h4>{{ todo.title }}</h4>
-            <ul style="list-style-type: none;">
+            <ul style="list-style-type: none">
               <li>{{ todo.description }}</li>
             </ul>
             <form method="POST" action="{% url 'undo_complete_todo' todo.id %}">
