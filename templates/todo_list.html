@@ -271,7 +271,7 @@
           {% for todo in upcoming_todos %}
           <div class="note yellow">
             <h4>{{ todo.title }}</h4>
-            <ul>
+            <ul style="list-style-type: none;">
               <li>{{ todo.description }}</li>
             </ul>
 
@@ -412,7 +412,7 @@
           {% for todo in completed_todos %}
           <div class="green">
             <h4>{{ todo.title }}</h4>
-            <ul>
+            <ul style="list-style-type: none;">
               <li>{{ todo.description }}</li>
             </ul>
             <form method="POST" action="{% url 'undo_complete_todo' todo.id %}">

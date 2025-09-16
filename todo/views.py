@@ -176,7 +176,7 @@ from rest_framework import status
 @api_view(['POST'])
 def login_user(request):
     username = request.data.get('username')
-    password = request.data.get('password')
+    password = request.data.get('password')                              
     user = authenticate(username=username, password=password)
 
     if user is not None:
