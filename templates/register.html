@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Register Page</title>
+  <title>Register / Login</title>
   <style>
     body {
       background: linear-gradient(to right, #6a11cb, #2575fc);
@@ -13,7 +13,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      padding: 15px; /* padding so on mobile content isn't flush */
+      padding: 15px;
     }
     .auth-container {
       background: #fff;
@@ -77,35 +77,25 @@
     button.submit-btn:hover {
       background: #1d5bd6;
     }
-
-    /* ===== MOBILE RESPONSIVE ===== */
     @media (max-width: 480px) {
       body {
         padding: 10px;
         height: auto;
       }
-
       .auth-container {
         padding: 20px 15px;
         width: 100%;
         max-width: 100%;
       }
-
       .tabs {
         flex-direction: column;
       }
-
       .tabs button {
         font-size: 14px;
         padding: 12px 0;
         margin-bottom: 10px;
         border-radius: 6px;
       }
-
-      .tabs button.active {
-        border-radius: 6px;
-      }
-
       input[type="text"],
       input[type="password"],
       input[type="email"],
@@ -119,19 +109,19 @@
 <body>
   <div class="auth-container">
     <div class="tabs">
-      <button class="tab-link" onclick="switchTab('login')">Login</button>
-      <button class="tab-link active" onclick="switchTab('register')">Register</button>
+      <button type="button" class="tab-link" onclick="switchTab('login')">Login</button>
+      <button type="button" class="tab-link active" onclick="switchTab('register')">Register</button>
     </div>
 
     <!-- Login Form -->
-    <form method="POST" class="tab-content" id="login-form">
+    <form method="POST" action="" class="tab-content" id="login-form">
       {% csrf_token %}
       {{ login_form.as_p }}
       <button class="submit-btn" type="submit" name="action" value="login">Login</button>
     </form>
 
     <!-- Register Form -->
-    <form method="POST" class="tab-content active" id="register-form">
+    <form method="POST" action="" class="tab-content active" id="register-form">
       {% csrf_token %}
       {{ register_form.as_p }}
       <button class="submit-btn" type="submit" name="action" value="register">Register</button>
