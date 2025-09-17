@@ -94,23 +94,28 @@ def register(request):
 
     if request.method == 'POST':
         action = request.POST.get('action')
+
         if action == 'login':
             login_form = LoginForm(request, data=request.POST)
             if login_form.is_valid():
                 user = login_form.get_user()
                 login(request, user)
                 return redirect('todo_list')
+
         elif action == 'register':
             register_form = RegisterForm(request.POST)
             if register_form.is_valid():
                 user = register_form.save()
                 login(request, user)
                 return redirect('todo_list')
+            else:
+                print(register_form.errors)  # ✅ log errors to console (PythonAnywhere error log)
 
     return render(request, 'register.html', {
         'login_form': login_form,
         'register_form': register_form,
     })
+
 
 
 

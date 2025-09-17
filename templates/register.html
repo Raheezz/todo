@@ -1,152 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Register / Login</title>
-  <style>
-    body {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      padding: 15px;
-    }
-    .auth-container {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 10px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      width: 360px;
-      max-width: 100%;
-      transition: all 0.3s ease-in-out;
-      box-sizing: border-box;
-    }
-    .tabs {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .tabs button {
-      flex: 1;
-      padding: 10px;
-      cursor: pointer;
-      border: none;
-      background: #f1f1f1;
-      font-weight: bold;
-      transition: 0.2s;
-      font-size: 16px;
-    }
-    .tabs button.active {
-      background: #2575fc;
-      color: white;
-    }
-    form {
-      display: none;
-      flex-direction: column;
-    }
-    form.active {
-      display: flex;
-    }
-    input[type="text"],
-    input[type="password"],
-    input[type="email"] {
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button.submit-btn {
-      margin-top: 15px;
-      background: #2575fc;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button.submit-btn:hover {
-      background: #1d5bd6;
-    }
-    @media (max-width: 480px) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register / Login</title>
+    <style>
       body {
-        padding: 10px;
-        height: auto;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 15px;
       }
       .auth-container {
-        padding: 20px 15px;
-        width: 100%;
+        background: #fff;
+        padding: 30px 25px;
+        border-radius: 10px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        width: 360px;
         max-width: 100%;
+        transition: all 0.3s ease-in-out;
+        box-sizing: border-box;
       }
       .tabs {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
       }
       .tabs button {
-        font-size: 14px;
-        padding: 12px 0;
-        margin-bottom: 10px;
-        border-radius: 6px;
+        flex: 1;
+        padding: 10px;
+        cursor: pointer;
+        border: none;
+        background: #f1f1f1;
+        font-weight: bold;
+        transition: 0.2s;
+        font-size: 16px;
+      }
+      .tabs button.active {
+        background: #2575fc;
+        color: white;
+      }
+      form {
+        display: none;
+        flex-direction: column;
+      }
+      form.active {
+        display: flex;
       }
       input[type="text"],
       input[type="password"],
-      input[type="email"],
-      button.submit-btn {
-        font-size: 14px;
-        padding: 12px;
+      input[type="email"] {
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="auth-container">
-    <div class="tabs">
-      <button type="button" class="tab-link" onclick="switchTab('login')">Login</button>
-      <button type="button" class="tab-link active" onclick="switchTab('register')">Register</button>
+      button.submit-btn {
+        margin-top: 15px;
+        background: #2575fc;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button.submit-btn:hover {
+        background: #1d5bd6;
+      }
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+          height: auto;
+        }
+        .auth-container {
+          padding: 20px 15px;
+          width: 100%;
+          max-width: 100%;
+        }
+        .tabs {
+          flex-direction: column;
+        }
+        .tabs button {
+          font-size: 14px;
+          padding: 12px 0;
+          margin-bottom: 10px;
+          border-radius: 6px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        button.submit-btn {
+          font-size: 14px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="tabs">
+        <button type="button" class="tab-link" onclick="switchTab('login')">
+          Login
+        </button>
+        <button
+          type="button"
+          class="tab-link active"
+          onclick="switchTab('register')"
+        >
+          Register
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form method="POST" action="" class="tab-content" id="login-form">
+        {% csrf_token %} {{ login_form.as_p }}
+        <button class="submit-btn" type="submit" name="action" value="login">
+          Login
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <!-- Register Form -->
+      <form method="POST" class="tab-content active" id="register-form">
+        {% csrf_token %} {{ register_form.as_p }} {% if register_form.errors %}
+        <div style="color: red; font-size: 14px">
+          {{ register_form.errors }}
+        </div>
+        {% endif %}
+        <button class="submit-btn" type="submit" name="action" value="register">
+          Register
+        </button>
+      </form>
     </div>
 
-    <!-- Login Form -->
-    <form method="POST" action="" class="tab-content" id="login-form">
-      {% csrf_token %}
-      {{ login_form.as_p }}
-      <button class="submit-btn" type="submit" name="action" value="login">Login</button>
-    </form>
+    <script>
+      function switchTab(tab) {
+        const loginBtn = document.querySelector(".tab-link:nth-child(1)");
+        const registerBtn = document.querySelector(".tab-link:nth-child(2)");
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
 
-    <!-- Register Form -->
-    <form method="POST" action="" class="tab-content active" id="register-form">
-      {% csrf_token %}
-      {{ register_form.as_p }}
-      <button class="submit-btn" type="submit" name="action" value="register">Register</button>
-    </form>
-  </div>
-
-  <script>
-    function switchTab(tab) {
-      const loginBtn = document.querySelector('.tab-link:nth-child(1)');
-      const registerBtn = document.querySelector('.tab-link:nth-child(2)');
-      const loginForm = document.getElementById('login-form');
-      const registerForm = document.getElementById('register-form');
-
-      if (tab === 'login') {
-        loginBtn.classList.add('active');
-        registerBtn.classList.remove('active');
-        loginForm.classList.add('active');
-        registerForm.classList.remove('active');
-      } else {
-        registerBtn.classList.add('active');
-        loginBtn.classList.remove('active');
-        registerForm.classList.add('active');
-        loginForm.classList.remove('active');
+        if (tab === "login") {
+          loginBtn.classList.add("active");
+          registerBtn.classList.remove("active");
+          loginForm.classList.add("active");
+          registerForm.classList.remove("active");
+        } else {
+          registerBtn.classList.add("active");
+          loginBtn.classList.remove("active");
+          registerForm.classList.add("active");
+          loginForm.classList.remove("active");
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
