@@ -16,19 +16,18 @@ Including another URLconf
 """
 
 # myproject/urls.py
+
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
 from todo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(template_name='register.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('login/', views.register, name='login'),   # use your own combined view
+    path('logout/', views.logout, name='logout'),   # custom logout or keep auth_views
     path('register/', views.register, name='register'),
-    path('', include('todo.urls')),  # this must be 'todo.urls'
+    path('', include('todo.urls')),  # todo app urls
 ]
-
 
 
 
